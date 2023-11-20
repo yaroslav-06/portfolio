@@ -15,9 +15,13 @@
   }
 }
 
+:root{
+  --tranform_anim_len: 0.4s;
+}
+
 body{
   background-color: black; 
-  overflow-y:hidden;
+  overflow:hidden;
 }
 
 .zhadan{
@@ -71,28 +75,47 @@ body{
   width: 21.8%;
   top: 14%;
   left: 2.7%;
-  opacity: 70%;
   position: absolute;
 }
 
 .sticker{
+  transition: transform .4s;
   opacity: 100%;
-  transition: transform, 0.4s
+}
+
+.sticker_par{
+  opacity: 100%;
+  z-index: 1;
+  transition-property: filter, transform,
+    top, left, z-index;
+  transition-duration: 0.75s, 1.5s, 1.5s, 1.5s, 1.5s;
+  transition-timing-function: steps(1),
+    cubic-bezier(.5, 0, .5, 1),
+    cubic-bezier(.5, 0, .5, 1),
+    cubic-bezier(.5, 0, .5, 1),
+    cubic-bezier(.5, 0, .5, 1);
+}
+
+.sticker_par:active{
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  filter: contrast(0) brightness(2);
+  transform: translate(-50%, -50%) scale(33)
+    rotate3d(0, 1, 0, 180deg);
 }
 
 .sticker:hover{
-  transform: scale(1.08); 
-}
-
-.sticker:active{
   transform: scale(1.25);
-  z-index: 10;
 }
 
 .back_panel{
-  animation: 2.6s cubic-bezier(0.20, 1, 0.22, 1) 0.01s 1 slideInFromLeft;
-  max-height: 90%;
-  max-width: 90%;
+  /* animation: 2.6s cubic-bezier(0.20, 1, 0.22, 1) 0.01s 1 slideInFromLeft; */
+  /* animation: 0s cubic-bezier(0.20, 1, 0.22, 1) 0.01s 1 slideInFromLeft; */
+  /* max-height: 80%; */
+  /* max-width: 80%; */
+  /* background: url("back_panel.png") center center; */
+  /* background-size: cover; */
   top: 50%;
   left: 50%;
   position: absolute;
@@ -106,7 +129,7 @@ body{
 }
 
 .back_panel img:nth-child(1){
-  width: 100%;
   height: 100%;
+  width: 100%;
   opacity: 100%;
 }
